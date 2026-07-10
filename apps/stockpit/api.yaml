@@ -63,11 +63,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: stockpit-api
+  name: stockpit-api http
   namespace: stockpit
 spec:
   selector:
-    app: stockpit-api
+    app: stockpit
   ports:
-    - port: 8000
+    - name: http
+      port: 8000
       targetPort: 8000
