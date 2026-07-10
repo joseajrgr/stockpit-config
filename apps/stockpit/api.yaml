@@ -4,7 +4,7 @@ metadata:
   name: stockpit-api
   namespace: stockpit
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: stockpit-api
