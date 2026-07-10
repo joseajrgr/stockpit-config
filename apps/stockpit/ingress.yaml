@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stockpit-api
+  namespace: stockpit
+spec:
+  rules:
+    - host: stockpit.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: stockpit-api
+                port:
+                  number: 8000
