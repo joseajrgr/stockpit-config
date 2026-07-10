@@ -18,7 +18,7 @@ spec:
         runAsUser: 10001
       containers:
         - name: api
-          image: ghcr.io/joseajrgr/stockpit-api:078396d81e32f926af3b3958f852f0e96c74372b
+          image: ghcr.io/joseajrgr/stockpit-api:cec1c5e882f17fa9df76f8549aba7723a389473c
           ports:
             - containerPort: 8000
           env:
