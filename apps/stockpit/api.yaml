@@ -69,7 +69,7 @@ metadata:
     app: stockpit-api
 spec:
   selector:
-    app: stockpit
+    app: stockpit-api
   ports:
     - name: http
       port: 8000
