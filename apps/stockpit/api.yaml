@@ -65,6 +65,8 @@ kind: Service
 metadata:
   name: stockpit-api
   namespace: stockpit
+  labels:
+    app: stockpit-api
 spec:
   selector:
     app: stockpit
