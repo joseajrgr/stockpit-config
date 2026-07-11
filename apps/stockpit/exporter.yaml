@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: exporter
-          image: ghcr.io/joseajrgr/stockpit-exporter:latest   # el pipeline lo cambiará a SHA
+          image: ghcr.io/joseajrgr/stockpit-exporter:8544bbebeafd0cf3cfd40842acddfe0f7dda7bce
           ports:
             - containerPort: 9105
           env:
