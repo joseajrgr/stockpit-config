@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stockpit-exporter
+  namespace: stockpit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stockpit-exporter
+  template:
+    metadata:
+      labels:
+        app: stockpit-exporter
+    spec:
+      containers:
+        - name: exporter
+          image: ghcr.io/joseajrgr/stockpit-exporter:latest   # el pipeline lo cambiará a SHA
+          ports:
+            - containerPort: 9105
+          env:
+            - name: API_URL
+              value: http://stockpit-api:8000
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 50m
+              memory: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stockpit-exporter
+  namespace: stockpit
+  labels:
+    app: stockpit-exporter
+spec:
+  selector:
+    app: stockpit-exporter
+  ports:
+    - name: metrics
+      port: 9105
+      targetPort: 9105
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: stockpit-exporter
+  namespace: stockpit
+  labels:
+    release: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: stockpit-exporter
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s
