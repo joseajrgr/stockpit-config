@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: stockpit-alerts
+  namespace: stockpit
+  labels:
+    release: monitoring
+spec:
+  groups:
+    - name: stockpit.inventario
+      rules:
+        - alert: ProductosBajoMinimo
+          expr: stockpit_products_low_stock > 0
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Hay {{ $value }} productos por debajo del stock mínimo"
+            description: "El inventario tiene productos bajo mínimo desde hace 5 minutos. Revisar reposición."
+        - alert: StockpitAPICaida
+          expr: stockpit_api_up == 0
+          for: 2m
+          labels:
+            severity: critical
+          annotations:
+            summary: "La API de Stockpit no responde"
+            description: "El exporter no puede contactar con la API desde hace 2 minutos."
