@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: exporter
-          image: ghcr.io/joseajrgr/stockpit-exporter:8544bbebeafd0cf3cfd40842acddfe0f7dda7bce
+          image: ghcr.io/joseajrgr/stockpit-exporter:c55d535c6b2244ec09654c8db6d5c2c6e57abb71
           ports:
             - containerPort: 9105
           env:
